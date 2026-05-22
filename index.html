@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>防骗模拟器</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <h1>防骗模拟器</h1>
+    </header>
+    <aside id="status-panel"></aside>
+    <main id="main-content"></main>
+    <aside id="log-panel"></aside>
+    <footer id="timeline"></footer>
+  </div>
+
+  <!-- Core -->
+  <script src="js/core/state.js"></script>
+  <script src="js/core/random.js"></script>
+  <script src="js/core/attributes.js"></script>
+  <script src="js/core/storage.js"></script>
+
+  <!-- Config -->
+  <script src="js/config/lifeStages.js"></script>
+  <script src="js/config/actions.js"></script>
+  <script src="js/config/careers.js"></script>
+  <script src="js/config/talents.js"></script>
+  <script src="js/config/lifeDecisions.js"></script>
+  <script src="js/config/randomEvents.js"></script>
+  <script src="js/config/fraudEvents.js"></script>
+  <script src="js/config/fraudChains.js"></script>
+  <script src="js/config/expandedEvents.js"></script>
+  <script src="js/config/endings.js"></script>
+  <script src="js/config/tools.js"></script>
+  <script src="js/config/achievements.js"></script>
+
+  <!-- Systems -->
+  <script src="js/systems/moneySystem.js"></script>
+  <script src="js/systems/toolSystem.js"></script>
+  <script src="js/systems/achievementSystem.js"></script>
+  <script src="js/systems/eventSystem.js"></script>
+  <script src="js/systems/fraudChainSystem.js"></script>
+  <script src="js/systems/endingSystem.js"></script>
+  <script src="js/systems/reportSystem.js"></script>
+
+  <!-- UI -->
+  <script src="js/ui/render.js"></script>
+
+  <!-- Game Loop (after UI) -->
+  <script src="js/core/gameLoop.js"></script>
+
+  <!-- Main -->
+  <script src="js/main.js"></script>
+</body>
+</html>
