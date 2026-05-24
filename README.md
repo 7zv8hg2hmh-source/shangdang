@@ -28,6 +28,16 @@ python3 -m http.server 8080
 2. `Build and deployment` 的 `Source` 选择 `GitHub Actions`
 3. 保存后等待 `Deploy static site to GitHub Pages` 工作流完成
 
+## 在线人数统计
+
+项目使用 Supabase RPC 统计在线人数、今日游玩人数和总游玩人数。
+
+1. 在 Supabase SQL Editor 执行 `supabase/migrations/001_game_analytics.sql`
+2. 在 `js/systems/analyticsSystem.js` 中填入 Supabase `anon public key`
+3. 推送到 `main` 后 GitHub Pages 会自动重新部署
+
+注意：不要把 Postgres 直连密码写进前端或提交到仓库。
+
 ## 游戏特色
 
 - **8 个人生阶段**：家庭启蒙期 → 儿童期 → 中学期 → 大学期 → 初入社会期 → 家庭事业期 → 中年资产期 → 养老期
