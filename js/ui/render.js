@@ -321,10 +321,87 @@ Game.UI = {
       stock_index_invest: ["你把钱分散投进去，没期待一夜暴富，只想让时间慢慢工作。"],
       stock_speculation: ["红绿数字跳得人心痒。你越看越想操作，也越该提醒自己别上头。"],
       antique_market: ["摊主故事讲得真，东西未必真。你边看边学，也把钱包握紧了一点。"],
-      museum_study: ["展柜里的器物安静得很。懂一点来龙去脉后，旧东西不再只是旧。"]
+      museum_study: ["展柜里的器物安静得很。懂一点来龙去脉后，旧东西不再只是旧。"],
+      buy_spicy_strips: ["校门口那包辣条很便宜，红油却把整个下午染得很热闹。你擦干净嘴，也记住了零花钱少一截的感觉。"],
+      buy_card_pack: ["卡包撕开的声音比上课铃更刺激。稀有卡没来，期待倒是结结实实花掉了五块钱。"],
+      save_pocket_money: ["你把小钱塞进储蓄罐，听见硬币落下去的一声响。那不是发财，是第一次认真延迟满足。"],
+      school_clinic: ["医务室的药味有点苦，但比硬撑舒服。小病及时处理，钱包也少挨一刀。"],
+      canteen_meal: ["你端着热饭坐下，胃终于不用靠零食糊弄。食堂不浪漫，但很实在。"],
+      night_snack: ["烧烤摊的烟火气把理智熏软了。吃完很满足，回去看余额时又清醒了一点。"],
+      regular_physical_exam: ["体检表一项项走完，身体像一家公司被查了账。花钱不快乐，但早发现问题很值。"],
+      clinic_visit: ["门诊排队很慢，叫号声很冷静。你把小毛病说清楚，也把一笔可能变大的账按住了。"],
+      home_cooking_budget: ["菜洗好、锅烧热，饭香慢慢出来。自己做饭不炫，但能同时照顾胃和钱包。"],
+      repair_lock: ["你检查门锁、密码和账户安全，把几个旧漏洞补上。安全感有时候就是一把新锁和一个新密码。"],
+      coin_capsule_toy: ["扭蛋转出来的一刻，你像在买一个迷你命运。玩具很小，随机感很会让人上头。"],
+      comic_rental: ["漫画书翻得飞快，纸页边角有很多人的指纹。你用几块钱租来一个放学后的异世界。"],
+      stationery_upgrade: ["新笔写起来很顺，作业好像也没那么硬了。文具不贵，但会让人短暂相信自己能重新开始。"],
+      snack_share_pack: ["零食袋一打开，同学立刻围过来。你花掉一点小钱，也买到一小圈热闹。"],
+      child_movie_ticket: ["电影院灯暗下去，爆米花香得过分。你看了一场电影，也见识了快乐可以被标价。"],
+      school_trip_fee: ["春游费交出去后，通知单终于不再压在书包里。那天的大巴、零食和合照，都开始有了成本。"],
+      sports_shoes_student: ["新运动鞋踩在地上有点硬，也有点神气。你跑得更快一点，钱包慢了一拍。"],
+      phone_case_student: ["旧手机换上新壳，像给日常生活贴了一张小贴纸。新鲜感不贵，但也不是免费。"],
+      idol_merch: ["周边拿到手时你很开心，包装袋都舍不得扔。喜欢是真的，价格也是真的。"],
+      exam_materials: ["资料买回来堆在桌上，焦虑暂时有了形状。真正有用的不是买下它，而是翻开它。"],
+      private_tutor_hour: ["补课老师把卡住的知识点拆开讲，你终于听懂了一点。那一小时很贵，也确实有重量。"],
+      student_group_meal: ["同学聚餐的笑声盖过了账单。散场后你发现，关系会变熟，余额也会变薄。"],
+      campus_laundry_card: ["洗衣卡充好后，脏衣篓终于不再像一座小山。生活费就是这样被一件件小事吃掉的。"],
+      dorm_decoration: ["小台灯亮起来，床帘拉上，宿舍突然像是你的地方。空间舒服了，钱包也空出一块。"],
+      secondhand_laptop: ["二手电脑开机那一刻你先听风扇，再看保修。便宜不是问题，来路和稳定才是重点。"],
+      online_course_paid: ["线上课加入了学习清单。你提醒自己：买课只是开始，别让课程躺在收藏夹里吃灰。"],
+      campus_short_trip: ["短途车票把你带出熟悉的校门。风景很好，回来后生活费也变得很有存在感。"],
+      job_interview_outfit: ["面试衣服穿上身，你站得更直了一点。体面不是虚荣，是给机会一个认真开场。"],
+      rent_better_room: ["新房间通勤短一点，窗户也亮一点。你用更高房租买回一些睡眠和呼吸。"],
+      commute_month_card: ["月卡办好后，每天出门少想一次零钱。稳定的小支出，也是在给生活铺轨道。"],
+      noise_cancel_headphones: ["降噪一开，世界像被拧小了音量。你买到的不只是耳机，还有一块安静。"],
+      fitness_membership: ["健身卡刷出去时很有仪式感。真正困难的是下周、下个月、以及每一个不想去的晚上。"],
+      therapy_session: ["咨询室里没有人急着评判你。那些乱成团的话被慢慢放到桌面上，心里松了一点。"],
+      dating_dinner: ["这顿饭你没有只顾表现，也没有乱花到失控。认真相处这件事，本来就该有预算。"],
+      gift_parents: ["礼物递过去时，父母嘴上说浪费钱，手却接得很仔细。你花掉的是钱，补上的是具体的关心。"],
+      annual_vacation: ["你离开熟悉的城市几天，身体终于慢下来。旅行很治愈，账单也很诚实。"],
+      house_cleaning_service: ["家政打扫完，地面亮得像换了个家。你用钱买回半天体力，也买回一点秩序。"],
+      small_appliance: ["小家电搬进厨房后，做饭多了一点期待。生活被调顺一点，支出也多了一项。"],
+      family_portrait: ["全家福拍下来的瞬间，大家都努力笑得自然。照片会留下，付款记录也会留下。"],
+      child_interest_class: ["兴趣班报名表填完，你比孩子还紧张。培养兴趣很好，前提是别把家庭预算练到变形。"],
+      parent_medical_exam: ["你陪父母做完体检，排队时听了很多家常话。钱花得心疼，但少一点后悔更重要。"],
+      car_maintenance: ["保养单上的项目一长串，车像一个会吞钱的铁朋友。修在小问题时，比坏在路上便宜。"],
+      home_repair: ["灯、锁、水龙头被逐个处理掉，家里少了几个烦人的小噪音。小维修也是守钱包。"],
+      better_mattress: ["新床垫躺下去那一刻，腰先替你点了头。睡眠很贵，但长期硬扛更贵。"],
+      dental_cleaning: ["洗牙时你盯着灯，认真反思每一次偷懒。牙齿不会说话，只会直接开账单。"],
+      new_year_red_packet: ["红包发出去时，年味一下子变得很具体。成年人过年，笑容和现金常常一起递出去。"],
+      friend_wedding_gift: ["份子钱写进礼金簿，你的名字也写进一段关系里。祝福是真的，支出也是真的。"],
+      pet_supplies: ["猫粮狗粮、玩具驱虫一项项加起来，陪伴忽然有了月度预算。它看着你，你又觉得值。"],
+      community_group_buy: ["团购群里满减很热闹，你下单前多看了一眼冰箱。省钱和囤货之间，只差一次冲动。"],
+      tea_house_afternoon: ["茶馆里时间走得慢，闲话一杯接一杯。你花了一点钱，换来半天不被催促。"],
+      senior_university_fee: ["老年大学缴费成功，课表重新出现。生活没有只剩回忆，还能继续上新课。"],
+      hearing_glasses_check: ["配镜和听力检查做完，世界清楚了一点，也近了一点。年纪上来后，清楚本身就值钱。"],
+      grandchild_gift: ["给晚辈挑礼物时，你反复比较价格和实用。爱很想大方，钱包提醒你适量。"],
+      short_drama_topup: ["你只想解锁几集，平台却把下一集放得刚刚好。爽点很密，扣费也很密。"],
+      premium_membership: ["会员开通后广告少了，自动续费也多了。舒服是真的，记得取消也是真的。"]
     };
-    var pool = texts[action.id] || ["你做了一些事情。生活继续着。"];
+    var pool = texts[action.id];
+    if (!pool) return this.buildUniqueActionFeedback(action, s);
     return pool[Math.floor(Game.random() * pool.length)];
+  },
+
+  buildUniqueActionFeedback: function(action, s) {
+    var stage = Game.getStage(s.age);
+    var effect = action.effects || {};
+    var moneyText = "";
+    if (typeof effect.money === "number") {
+      if (effect.money < 0) moneyText = "这次花掉了" + Game.MoneySystem.formatMoney(Math.abs(effect.money)) + "，钱包立刻有了反应。";
+      if (effect.money > 0) moneyText = "这次挣到" + Game.MoneySystem.formatMoney(effect.money) + "，钱来得不算轻松。";
+    }
+    var bodyText = "";
+    if (typeof effect.health === "number" && effect.health > 0) bodyText = "身体也收到了一点正向回报。";
+    if (typeof effect.health === "number" && effect.health < 0) bodyText = "身体替这次选择记了一笔账。";
+    var fatigueText = "";
+    if ((action.fatigue || 0) > 0) fatigueText = "做完以后，你能感觉到疲劳往上冒。";
+    if ((action.fatigue || 0) < 0) fatigueText = "难得的是，疲劳被往下压了一点。";
+    var detail = action.desc ? action.desc : action.name;
+    return stage.name + "的这一年，你选择了「" + action.name + "」。" + detail + "不是背景板，而是这一年具体发生过的事。" +
+      (moneyText ? " " + moneyText : "") +
+      (bodyText ? " " + bodyText : "") +
+      (fatigueText ? " " + fatigueText : "");
   },
 
   // === LIFE DECISION ===
