@@ -8,9 +8,13 @@ Game.EndingSystem = {
     if (s.trust <= 0) return this.findEnding("trust_bankrupt");
     if (s.health <= 0) return this.findEnding("health_crash");
     if (s.debt >= 100000 && s.mental <= 5) return this.findEnding("debt_spiral");
-    if (s.lifeFlags && s.lifeFlags.college_lottery_jackpot && s.age <= 24 && s.money >= 300000) return this.findEnding("college_lottery_detour");
-    if (s.lifeFlags && (s.lifeFlags.middle_school_bankrupt || (s.lifeFlags.student_wallet_collapse && s.debt >= 4500 && s.familyTrust <= 6)) && s.age <= 18) return this.findEnding("middle_school_bankrupt");
-    if (s.lifeFlags && s.lifeFlags.young_debt_collapse && s.age <= 30 && s.debt >= 30000) return this.findEnding("young_debt_collapse");
+
+    var early = Game.Endings.slice().sort(function(a, b) { return a.priority - b.priority; });
+    for (var j = 0; j < early.length; j++) {
+      if (early[j].priority <= 0 && early[j].condition && early[j].condition(s)) {
+        return early[j];
+      }
+    }
 
     if (s.age >= 80) {
       var sorted = Game.Endings.slice().sort(function(a, b) { return a.priority - b.priority; });

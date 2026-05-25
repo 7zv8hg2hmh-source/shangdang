@@ -65,7 +65,22 @@ window.Game = window.Game || {};
     });
   }
 
+  // Childhood: tiny money, big consequences.
+  rc("red_packet_audit", "压岁钱清点大会", "春节后，家里开始清点红包。你的小金库被摆到桌上，每一张钱都像被点名。", [
+    { text: "接受托管，留一点零花", effects: { money: 20, familyTrust: 1, awareness: 1 }, result: "大部分钱被存起来，你争取到一点自由额度。童年财权很小，但不是没有。" },
+    { text: "哭闹坚持全要回来", effects: { familyTrust: -2, shame: 1, greed: 1 }, setFlag: "childhood_wallet_taken_over", result: "家里最后决定全面代管。你的钱包还没长大，就先被制度化了。" },
+    { text: "偷偷藏一半", effects: { money: 80, familyTrust: -3, shame: 2, greed: 1 }, setFlag: "childhood_wallet_taken_over", result: "钱藏住了几天，信任没藏住。找到那一刻，屋里突然很安静。" }
+  ], ["childhood"], function(s) { return s.age >= 7 && s.age <= 12; }, 0.2);
+
+  rc("snack_credit_book", "小卖部赊账本", "小卖部老板拿出一本皱巴巴的本子，上面写着你的名字：辣条、干脆面、汽水、贴纸包。", [
+    { text: "回家说明白", effects: { familyTrust: 1, shame: 1, awareness: 2, money: -30 }, result: "你挨了批评，也把账结清了。大人说：钱小，撒谎不小。" },
+    { text: "让同学先垫", effects: { debt: 120, trust: -1, shame: 2 }, setFlag: "childhood_snack_debt", result: "你欠下的不止是一点钱，还有每天见到同学时的心虚。" },
+    { text: "说老板记错了", effects: { familyTrust: -3, trust: -2, shame: 2 }, setFlag: "childhood_snack_debt", result: "老板没有多说，只把本子翻给家长看。你第一次知道证据会说话。" }
+  ], ["childhood"], function(s) { return (s.snackHabit || 0) >= 2 || s.greed >= 6; }, 0.18);
+
   // School years: tiny wallets can still collapse under embarrassment, comparison, and impulse.
+  r("recommendation_offer", "提前录取的电话", "老师通知你有一个提前录取/推荐培养的机会。家里人反复确认，不敢相信这是真的。", { awareness: 2, familyTrust: 2, happiness: 3, shame: -1 }, ["middle_school"], function(s) { return s.age >= 15 && s.age <= 18 && s.awareness >= 9 && s.familyTrust >= 10 && Game.random() < 0.08; }, 0.04, { setFlag: "middle_school_recommendation" });
+
   rc("game_skin_refund", "游戏皮肤账单", "你发现自己偷偷充的游戏皮肤已经花到一个吓人的数字。账单躺在手机里，像一张会发光的处分单。", [
     { text: "主动和家里说清楚", effects: { familyTrust: 1, shame: 1, awareness: 2, greed: -1 }, result: "家里很生气，但你们一起申请退款、改支付密码。钱没全回来，坑至少停住了。" },
     { text: "继续瞒着，借同学周转", effects: { debt: 3800, familyTrust: -3, shame: 2, risk: 2 }, setFlag: "student_wallet_collapse", result: "你用新的窟窿盖旧的窟窿。第二天上课时，你看着黑板，却一直在算钱怎么还。" },
@@ -97,6 +112,8 @@ window.Game = window.Game || {};
   // College: windfalls, traps, roommates, and the first adult-sized bills.
   r("college_lottery_jackpot", "录取路上的一张彩票", "去学校报到的路上，你顺手买了一张十元公益彩票。几天后，号码对上了。世界突然把一条完全不同的路塞进你手里。", { money: 500000, happiness: 6, greed: 2, awareness: 1 }, ["college"], function(s) { return s.age >= 19 && s.age <= 24 && !s.lifeFlags.college_lottery_jackpot && Game.random() < 0.012; }, 0.02, { setFlag: "college_lottery_jackpot" });
 
+  r("campus_creator_burst", "校园短剧爆了", "你和同学拍的一条短剧突然爆了。私信、合作、报价和质疑一夜之间挤满手机。", { money: 60000, digitalSkill: 2, happiness: 4, fatigue: 2, greed: 2 }, ["college"], function(s) { return s.age >= 19 && s.age <= 24 && (s.hobbyTags.indexOf("short_drama_create") !== -1 || s.careerId === "media_creator") && Game.random() < 0.08; }, 0.05, { setFlag: "campus_creator_burst" });
+
   r("college_small_lottery", "小奖到账", "你买饮料顺手扫码抽奖，中了三百块。好运很轻，轻到你差点把它误认为规律。", { money: 300, happiness: 1, greed: 1 }, ["college"], function(s) { return s.age >= 19 && s.age <= 24; }, 0.08);
 
   rc("roommate_laptop_water", "室友电脑进水", "宿舍里一杯水倒了，室友的电脑黑屏。没人能完全说清是谁碰到的杯子，空气像拧紧的毛巾。", [
@@ -118,6 +135,8 @@ window.Game = window.Game || {};
   ], ["college"], function(s) { return s.age >= 20; }, 0.17);
 
   r("young_debt_collapse", "年轻时债务失控", "花呗、培训贷、朋友借款和生活费缺口挤到同一天。你的手机不断弹出提醒，像一场没有铃声的考试。", { mental: -3, shame: 3, risk: 2 }, ["college", "early_career"], function(s) { return s.age <= 30 && s.debt >= 30000 && s.mental <= 8; }, 0.18, { setFlag: "young_debt_collapse" });
+
+  r("college_dropout_bill", "退学申请表", "辅导员把退学/休学申请表推到你面前。你不是突然不想读了，是钱、心态和现实一起把你推到门口。", { mental: -3, shame: 2, familyTrust: -2 }, ["college"], function(s) { return s.age <= 24 && (s.debt >= 18000 || s.mental <= 5) && s.familyTrust <= 6; }, 0.16, { setFlag: "college_dropout_reset" });
 
   // Everyday wallet blockers: the money is guarded, then life knocks on the door.
   rc("rent_deposit_dispute", "房东不退押金", "退租那天，房东拿着一张清单说墙面、地板、门锁都有问题，押金先不退。", [
@@ -166,6 +185,27 @@ window.Game = window.Game || {};
     { text: "不交钱，保留原片", effects: { awareness: 2, digitalSkill: 1 }, result: "真正买版权的人不会先让卖家交钱。你的宇宙浪漫没有变成钱包漏洞。" },
     { text: "交认证费试试", effects: { money: -1200, greed: 1, shame: 1, risk: 2 }, result: "对方消失得像夜空里的光点。小概率奇遇，也可能接上高概率套路。" }
   ], S.adult, function(s) { return s.hobbyTags.indexOf("astronomy") !== -1 || s.lifeFlags.seen_ufo; }, 0.05);
+
+  // Life can jump tracks: job, house, illness, investment, retirement.
+  r("layoff_rent_cliff", "裁员后的房租日", "裁员补偿还没到账，房租、分期和社保先到了。你站在出租屋里，第一次觉得城市的灯也有价格。", { debt: 22000, mental: -3, shame: 2, risk: 2 }, ["early_career"], function(s) { return s.age >= 25 && s.age <= 35 && s.debt >= 8000 && s.money <= 3000; }, 0.16, { setFlag: "early_career_layoff_cliff" });
+
+  r("startup_buyout_call", "项目被买走了", "你做的小项目被一家大公司看上。对方说想收购，报价比你这几年工资还高。", { money: 150000, happiness: 5, greed: 2, awareness: 1, fatigue: 1 }, ["early_career"], function(s) { return s.age >= 23 && s.age <= 35 && (s.lastAction === "sidejob" || s.lastAction === "content_creator" || s.digitalSkill >= 12) && Game.random() < 0.05; }, 0.04, { setFlag: "startup_buyout" });
+
+  r("viral_contract_offer", "短剧公司递来合同", "短剧账号涨粉后，有公司递来合同。报价诱人，违约条款也厚得像一本小书。", { money: 40000, digitalSkill: 2, fatigue: 2, greed: 2, risk: 1 }, ["college", "early_career", "family_career"], function(s) { return (s.hobbyTags.indexOf("short_drama_create") !== -1 || s.careerId === "media_creator") && s.digitalSkill >= 8 && Game.random() < 0.06; }, 0.05, { setFlag: "viral_short_drama_contract" });
+
+  r("mortgage_payment_break", "房贷扣款失败", "银行卡余额不足，房贷扣款失败。短信很短，却像把整个家都震了一下。", { debt: 90000, familyTrust: -3, mental: -3, shame: 3 }, ["family_career", "midlife_asset"], function(s) { return s.lifeFlags.has_house && s.debt >= 40000 && s.money <= 5000; }, 0.18, { setFlag: "mortgage_foreclosure" });
+
+  r("demolition_notice", "老房子贴上通知", "老房子楼下贴出征收补偿通知。亲戚们突然频繁联系，连多年不说话的人都记起了门牌号。", { money: 420000, familyTrust: -1, greed: 3, happiness: 4 }, ["family_career", "midlife_asset"], function(s) { return s.age >= 35 && s.age <= 60 && (s.lifeFlags.has_house || s.familyTrust >= 10) && Game.random() < 0.035; }, 0.03, { setFlag: "demolition_windfall" });
+
+  r("family_major_illness_bill", "病房外的缴费单", "家里有人突然住院，缴费窗口的数字一张接一张。你开始明白，家庭资产也会被一场病重新排序。", { money: -30000, debt: 60000, medicalSpend: 30000, mental: -3, familyTrust: 1 }, ["family_career", "midlife_asset"], function(s) { return s.age >= 35 && s.age <= 65 && (s.health <= 9 || s.familyTrust >= 8) && Game.random() < 0.08; }, 0.08, { setFlag: "family_medical_bankruptcy" });
+
+  r("margin_call_sms", "强平短信", "你加杠杆的账户触发强平。短信弹出来时，市场已经替你做完了决定。", { money: -60000, debt: 70000, mental: -4, shame: 3, greed: -2 }, ["family_career", "midlife_asset"], function(s) { return s.stockPosition >= 2 && s.greed >= 8 && s.age >= 35; }, 0.14, { setFlag: "stock_margin_call" });
+
+  r("antique_auction_trap", "拍卖保证金", "所谓拍卖公司说你的藏品很有潜力，但要先交图录费、保证金和专家包装费。", { money: -25000, debt: 35000, greed: 2, shame: 2, risk: 2 }, ["midlife_asset", "elderly"], function(s) { return (s.antiqueCollection > 0 || s.hobbyTags.indexOf("antiques") !== -1) && s.age >= 45; }, 0.14, { setFlag: "antique_ruin" });
+
+  r("retirement_bank_blocked_transfer", "银行柜台拦下转账", "你准备给一个'高收益养老项目'转钱，柜台工作人员反复核实，最后建议你先联系家人和社区。", { awareness: 3, familyTrust: 2, reportedCount: 1, greed: -2 }, ["elderly"], function(s) { return s.age >= 66 && s.money >= 80000 && s.greed >= 5 && s.awareness >= 9; }, 0.16, { setFlag: "retirement_money_guarded" });
+
+  r("elderly_savings_zero", "养老账户只剩零头", "你以为自己买的是养老项目，直到平台打不开，群主退群，客服号码变成空号。", { money: -90000, mental: -4, loneliness: 3, shame: 3, fraudLoss: 90000 }, ["elderly"], function(s) { return s.age >= 66 && s.money >= 50000 && s.awareness <= 10 && (s.loneliness >= 8 || s.greed >= 7); }, 0.12, { setFlag: "elderly_savings_wiped" });
 
   // Action follow-ups that make even sensible actions produce drama.
   aec("save_money_interrupted", "刚想存钱，账单来了", "你刚下定决心守住钱包，手机就弹出一串待缴费：水电、话费、会员、维修、班费。", ["emergency_fund", "asset_checkup", "mortgage_calculation"], [

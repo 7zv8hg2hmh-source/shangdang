@@ -2,6 +2,36 @@ window.Game = window.Game || {};
 
 Game.Endings = [
   {
+    id: "childhood_wallet_taken_over",
+    title: "童年小金库被接管",
+    condition: function(s) {
+      return s.age <= 12 && s.lifeFlags && s.lifeFlags.childhood_wallet_taken_over;
+    },
+    priority: 0,
+    text: "你的零花钱、压岁钱和小卖部计划被家里全面接管。人生没有失败，只是太早遇到财务监管。你还会长大，但这条童年线提前停在一句熟悉的话里：'先帮你存着。'",
+    flavor: "有些钱包不是被偷走的，是被爱和担心一起收走的。"
+  },
+  {
+    id: "childhood_snack_debt",
+    title: "辣条账本翻车",
+    condition: function(s) {
+      return s.age <= 12 && s.lifeFlags && s.lifeFlags.childhood_snack_debt && s.familyTrust <= 7;
+    },
+    priority: 0,
+    text: "几块钱、几包辣条、几次撒谎，最后变成一本你解释不清的小账本。大人没有真的因为钱崩溃，而是因为你学会了躲。你的童年提前进入重建信任模式。",
+    flavor: "最早的财商课，有时写在辣条包装背面。"
+  },
+  {
+    id: "middle_school_recommendation",
+    title: "少年提前上岸",
+    condition: function(s) {
+      return s.age <= 18 && s.lifeFlags && s.lifeFlags.middle_school_recommendation && s.awareness >= 10;
+    },
+    priority: 0,
+    text: "竞赛、面试、老师推荐和家里支持在某一年突然对齐。你提前拿到一张通往更好平台的入场券。钱包暂时没有被撕开，人生却已经被重新分流。",
+    flavor: "不是开挂，是长期认真在某一刻显影。"
+  },
+  {
     id: "college_lottery_detour",
     title: "大学那张彩票",
     condition: function(s) {
@@ -30,6 +60,126 @@ Game.Endings = [
     priority: 0,
     text: "培训贷、分期、房租、人情和生活费缺口叠在一起，终于把你逼到必须停下来的地方。你没有走到80岁才得到结局，因为债务提前替你按下了暂停键。接下来的人生不是结束，而是从还清第一笔开始。",
     flavor: "不是所有结局都发生在老年，有些发生在还款日。"
+  },
+  {
+    id: "college_dropout_reset",
+    title: "大学提前退场",
+    condition: function(s) {
+      return s.age <= 24 && s.lifeFlags && s.lifeFlags.college_dropout_reset;
+    },
+    priority: 0,
+    text: "学费、生活费、情绪和债务一起压下来，你决定先离开校园。不是所有离开都是输，但这条大学线确实提前结束了。接下来你要面对的不是试卷，而是工资、房租和重新开始的勇气。",
+    flavor: "人生不是只认一张课表，但离开课表之后，账单会亲自点名。"
+  },
+  {
+    id: "campus_creator_burst",
+    title: "校园短剧爆了",
+    condition: function(s) {
+      return s.age <= 24 && s.lifeFlags && s.lifeFlags.campus_creator_burst && s.money >= 50000;
+    },
+    priority: 0,
+    text: "你拍的一条短剧突然爆了。广告、邀约、合同、同学的羡慕和平台的规则一起涌来。大学还没毕业，人生就提前被流量推到岔路口。",
+    flavor: "流量像一阵大风，吹得起人，也吹得乱账本。"
+  },
+  {
+    id: "early_career_layoff_cliff",
+    title: "第一份工作后的悬崖",
+    condition: function(s) {
+      return s.age >= 22 && s.age <= 35 && s.lifeFlags && s.lifeFlags.early_career_layoff_cliff && s.debt >= 20000;
+    },
+    priority: 0,
+    text: "裁员邮件来的那天，房租、分期、社保和生活费没有跟着暂停。你不是不努力，只是现金流太薄。人生提前被迫进入求生模式：先活下来，再谈体面。",
+    flavor: "有些悬崖不是在山上，而是在下个月一号。"
+  },
+  {
+    id: "startup_buyout",
+    title: "年轻创业被收购",
+    condition: function(s) {
+      return s.age >= 22 && s.age <= 35 && s.lifeFlags && s.lifeFlags.startup_buyout && s.money >= 120000;
+    },
+    priority: 0,
+    text: "你做的小项目被一家更大的公司买走。合同签完，银行卡里的数字不像工资，倒像命运突然改口。普通打工线提前结束，新的问题变成：这笔钱怎么守住。",
+    flavor: "暴富不是通关，它只是把难度菜单展开了。"
+  },
+  {
+    id: "viral_short_drama_contract",
+    title: "短剧合同改道人生",
+    condition: function(s) {
+      return s.age >= 19 && s.age <= 45 && s.lifeFlags && s.lifeFlags.viral_short_drama_contract;
+    },
+    priority: 0,
+    text: "一部短剧让你忽然站到镜头和合同中间。钱、版权、分成、违约金、舆论一起出现，生活不再按年推进，而是按热搜刷新。你的旧人生线提前断在一次爆量之后。",
+    flavor: "爽点很快，合同很长。"
+  },
+  {
+    id: "mortgage_foreclosure",
+    title: "房贷断供",
+    condition: function(s) {
+      return s.age >= 30 && s.age <= 55 && s.lifeFlags && s.lifeFlags.mortgage_foreclosure && s.debt >= 80000;
+    },
+    priority: 0,
+    text: "房子还在，月供却撑不住了。催缴、协商、亲戚电话和家庭争吵挤成一团。你曾以为买房是稳定结局，后来才知道它也可能成为提前结局。",
+    flavor: "房本很厚，现金流很薄。"
+  },
+  {
+    id: "demolition_windfall",
+    title: "一纸拆迁通知",
+    condition: function(s) {
+      return s.age >= 30 && s.age <= 60 && s.lifeFlags && s.lifeFlags.demolition_windfall && s.money >= 300000;
+    },
+    priority: 0,
+    text: "一纸通知把老房子、亲戚关系、城市规划和账户余额全都搅动起来。补偿款到账那天，你的人生路线突然换了底盘。守住钱袋子变成新的主线。",
+    flavor: "命运有时不是敲门，是贴公告。"
+  },
+  {
+    id: "family_medical_bankruptcy",
+    title: "家庭医疗清算",
+    condition: function(s) {
+      return s.age >= 35 && s.age <= 65 && s.lifeFlags && s.lifeFlags.family_medical_bankruptcy && s.debt >= 50000;
+    },
+    priority: 0,
+    text: "一场病把存款、保险、亲情和选择题同时摆到桌上。你没有做错什么，但家庭资产还是被迫清算。人生提前进入照护、还债和重新分配责任的章节。",
+    flavor: "病历上的字不多，每一行都很贵。"
+  },
+  {
+    id: "stock_margin_call",
+    title: "账户强平",
+    condition: function(s) {
+      return s.age >= 35 && s.age <= 65 && s.lifeFlags && s.lifeFlags.stock_margin_call;
+    },
+    priority: 0,
+    text: "市场没有给你解释机会。强平短信来的时候，你才明白高杠杆不是放大收益，而是放大命运的手。中年资产线提前碎在一根大阴线里。",
+    flavor: "屏幕红的时候，人的脸也会发白。"
+  },
+  {
+    id: "antique_ruin",
+    title: "古玩局里醒来",
+    condition: function(s) {
+      return s.age >= 45 && s.age <= 75 && s.lifeFlags && s.lifeFlags.antique_ruin && s.debt >= 30000;
+    },
+    priority: 0,
+    text: "故事、证书、专家、拍卖和面子把你一步步推深。等你醒来，柜子里多了几件讲不清来历的东西，账户里少了多年积蓄。收藏线提前变成清债线。",
+    flavor: "最贵的不是假货，是相信自己一定能捡漏。"
+  },
+  {
+    id: "retirement_money_guarded",
+    title: "养老钱守住了",
+    condition: function(s) {
+      return s.age >= 66 && s.age < 80 && s.lifeFlags && s.lifeFlags.retirement_money_guarded && s.money >= 80000 && s.awareness >= 12;
+    },
+    priority: 0,
+    text: "你在最容易被盯上的年纪守住了养老钱。孩子、社区、银行工作人员和你自己的谨慎共同拦下了一次大坑。人生没有走到80岁才给答案，因为这一刻已经足够像结局。",
+    flavor: "晚年的胜利，有时就是一次没有转出去的钱。"
+  },
+  {
+    id: "elderly_savings_wiped",
+    title: "养老钱清零",
+    condition: function(s) {
+      return s.age >= 66 && s.lifeFlags && s.lifeFlags.elderly_savings_wiped && (s.money <= 1000 || s.fraudLoss >= 90000);
+    },
+    priority: 0,
+    text: "养老钱被一场精心设计的局掏空。你坐在银行大厅里，手里攥着回执，忽然觉得很多年的节省都变得很轻。人生提前停在这一刻，不是为了惩罚你，而是提醒后来的人。",
+    flavor: "孤独会被报价，信任也会被收割。"
   },
   {
     id: "true_shore",
