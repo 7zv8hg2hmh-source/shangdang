@@ -2,6 +2,36 @@ window.Game = window.Game || {};
 
 Game.Endings = [
   {
+    id: "college_lottery_detour",
+    title: "大学那张彩票",
+    condition: function(s) {
+      return s.age <= 24 && s.lifeFlags && s.lifeFlags.college_lottery_jackpot && s.money >= 300000;
+    },
+    priority: 0,
+    text: "你刚进入大学，就被一张小小的彩票改写了现金流。钱突然多到不像生活费，亲戚、同学、机会和诱惑也同时涌来。你没有因此变成另一个人，但这条普通人生线已经被提前改道。",
+    flavor: "天降横财不是终点，是另一套更难的考卷。"
+  },
+  {
+    id: "middle_school_bankrupt",
+    title: "中学钱包破产",
+    condition: function(s) {
+      return s.age <= 18 && s.lifeFlags && (s.lifeFlags.middle_school_bankrupt || (s.lifeFlags.student_wallet_collapse && s.debt >= 4500 && s.familyTrust <= 6));
+    },
+    priority: 0,
+    text: "你还没真正进入社会，账单就先一步长成了大人的样子。游戏充值、培训分期、同学借款和瞒着家里的恐慌滚在一起，终于超过了一个中学生能独自处理的范围。人生被迫暂停，先清账、认错、重建边界。",
+    flavor: "小钱包也会破产，尤其在它假装自己是成年人钱包的时候。"
+  },
+  {
+    id: "young_debt_collapse",
+    title: "年轻人的债务急刹",
+    condition: function(s) {
+      return s.age <= 30 && s.lifeFlags && s.lifeFlags.young_debt_collapse && s.debt >= 30000;
+    },
+    priority: 0,
+    text: "培训贷、分期、房租、人情和生活费缺口叠在一起，终于把你逼到必须停下来的地方。你没有走到80岁才得到结局，因为债务提前替你按下了暂停键。接下来的人生不是结束，而是从还清第一笔开始。",
+    flavor: "不是所有结局都发生在老年，有些发生在还款日。"
+  },
+  {
     id: "true_shore",
     title: "真正走到对岸",
     condition: function(s) {

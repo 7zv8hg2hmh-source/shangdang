@@ -300,8 +300,15 @@ Game.Loop = {
   },
 
   applyEventState: function(item) {
-    if (!item || !item.stateEffects) return;
+    if (!item) return;
     var s = Game.state;
+    if (item.setFlag) s.lifeFlags[item.setFlag] = true;
+    if (item.flag) s.lifeFlags[item.flag] = true;
+    if (item.flags) {
+      item.flags.forEach(function(flag) { s.lifeFlags[flag] = true; });
+    }
+    if (item.clearFlag) delete s.lifeFlags[item.clearFlag];
+    if (!item.stateEffects) return;
     for (var key in item.stateEffects) {
       if (!item.stateEffects.hasOwnProperty(key)) continue;
       var old = typeof s[key] === "number" ? s[key] : 0;
