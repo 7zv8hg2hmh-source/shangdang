@@ -398,7 +398,9 @@ Game.UI = {
     if ((action.fatigue || 0) > 0) fatigueText = "做完以后，你能感觉到疲劳往上冒。";
     if ((action.fatigue || 0) < 0) fatigueText = "难得的是，疲劳被往下压了一点。";
     var detail = action.desc ? action.desc : action.name;
-    return stage.name + "的这一年，你选择了「" + action.name + "」。" + detail + "不是背景板，而是这一年具体发生过的事。" +
+    var opening = stage.name + "，你把这一格体力投给了「" + action.name + "」。";
+    var scene = "现场很具体：" + detail + "。";
+    return opening + scene +
       (moneyText ? " " + moneyText : "") +
       (bodyText ? " " + bodyText : "") +
       (fatigueText ? " " + fatigueText : "");
