@@ -100,7 +100,8 @@ Game.AnalyticsSystem = {
 
   value: function(v) {
     if (v === null || typeof v === "undefined") return "--";
-    return Number(v).toLocaleString("zh-CN");
+    var number = Number(v);
+    return Number.isFinite(number) ? number.toLocaleString("zh-CN") : "--";
   },
 
   setStatus: function(text) {
